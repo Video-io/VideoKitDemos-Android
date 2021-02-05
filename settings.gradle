@@ -1,0 +1,3 @@
+include ':feed'
+include ':stories'
+rootProject.name = "VideoKitDemos-Android"
