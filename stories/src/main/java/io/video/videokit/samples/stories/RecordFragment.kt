@@ -2,12 +2,11 @@ package io.video.videokit.samples.stories
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +16,8 @@ import io.video.videokit.camera.CameraFacing
 import io.video.videokit.common.SortOrder
 import io.video.videokit.execution.onError
 import io.video.videokit.execution.onSuccess
-import io.video.videokit.player.pager.ui.PagerFragment
 import io.video.videokit.recorder.*
+import io.video.videokit.recorder.ui.*
 import io.video.videokit.requests.FilteredPlaylistRequest
 import io.video.videokit.upload.Upload
 import io.video.videokit.upload.UploadListener
@@ -38,8 +37,8 @@ class RecordFragment : RecorderFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recycler = view.findViewById<RecyclerView>(R.id.recycler)
-        recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         // NOTE: It is recommended to load the playlist from your ViewModel and store it there.
         // This way, you avoid reloading it on configuration change, and you can subscribe to
@@ -51,7 +50,7 @@ class RecordFragment : RecorderFragment() {
         VideoKit.videos().getPlaylist(request).onError {
             Toast.makeText(requireContext(), "Error while loading stories playlist: $it", Toast.LENGTH_LONG).show()
         }.onSuccess { playlist ->
-            recycler.adapter = ThumbnailAdapter(viewLifecycleOwner, playlist) { position ->
+            recyclerView.adapter = ThumbnailAdapter(viewLifecycleOwner, playlist) { position ->
                 requireActivity().supportFragmentManager.commit {
                     setReorderingAllowed(true)
                     addToBackStack("Record")
@@ -60,15 +59,39 @@ class RecordFragment : RecorderFragment() {
             }
         }
 
-        // Configure recorder listener. Whenever record is complete, call cancel so it goes back
-        // to the starting screen and we can record more videos.
+        // Retrieve and configure extra controls.
+        val durationView = view.findViewById<TextView>(R.id.duration)
+        val postView = view.findViewById<View>(R.id.post)
+        val discardView = view.findViewById<View>(R.id.discard)
+        postView.setOnClickListener {
+            // Preview has been accepted. Let's confirm and finalize the upload.
+            confirm()
+        }
+        discardView.setOnClickListener {
+            // By calling reset, we exit RecorderState.PREVIEW AND clear any pending record.
+            // If you want to only exit the preview state and keep the record, use exitRecord().
+            reset()
+        }
+
+        // Configure recorder listener.
         addListener(viewLifecycleOwner, object : RecorderListener {
             override fun onStateChanged(state: Int) {
-                recycler.isInvisible = state != RecorderState.IDLE || record != null
+                recyclerView.isInvisible = state != RecorderState.IDLE || record != null
+                durationView.isVisible = state == RecorderState.RECORDING || (state == RecorderState.IDLE && record != null)
+                postView.isVisible = state == RecorderState.PREVIEW
+                discardView.isVisible = state == RecorderState.PREVIEW
             }
 
             override fun onRecordChanged(record: Record?) {
-                recycler.isInvisible = state != RecorderState.IDLE || record != null
+                recyclerView.isInvisible = state != RecorderState.IDLE || record != null
+                durationView.isVisible = state == RecorderState.RECORDING || (state == RecorderState.IDLE && record != null)
+            }
+
+            override fun onDurationChanged(duration: Long) {
+                // max duration is 15s so we don't care about minutes / hours.
+                val seconds = duration / 1000
+                val maxSeconds = maxDuration / 1000
+                durationView.text = "${seconds}s / ${maxSeconds}s"
             }
 
             override fun onResult(record: Record) {

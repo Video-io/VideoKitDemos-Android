@@ -19,7 +19,7 @@ class FeedViewHolder(parent: ViewGroup, lifecycle: LifecycleOwner) : RecyclerVie
     init {
         controls.setPlayer(player)
         player.bind(lifecycle)
-        player.loop = false
+        player.loop = true
         player.aspectMode = AspectMode.CENTER_CROP
     }
 

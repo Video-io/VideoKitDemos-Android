@@ -23,7 +23,8 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             android:text="Like"
             android:gravity="center"
-            android:padding="16dp"
+            android:paddingVertical="16dp"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/action_comment"/>
@@ -35,7 +36,8 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             android:text="Comment"
             android:gravity="center"
-            android:padding="16dp"
+            android:paddingVertical="16dp"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/action_like"
             app:layout_constraintEnd_toStartOf="@id/action_share"/>
@@ -47,7 +49,8 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             android:text="Share"
             android:gravity="center"
-            android:padding="16dp"
+            android:paddingVertical="16dp"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/action_comment"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -55,6 +58,8 @@
         <io.video.videokit.player.ui.PlayerView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            tools:layout_height="350dp"
+            tools:layout_width="350dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -64,6 +69,8 @@
         <io.video.videokit.player.ui.controls.PlayerControls
             android:layout_width="0dp"
             android:layout_height="0dp"
+            tools:layout_height="350dp"
+            tools:layout_width="350dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

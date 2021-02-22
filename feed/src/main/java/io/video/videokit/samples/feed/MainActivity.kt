@@ -17,10 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Logger.collector = Logger.Collector { level, tag, message, throwable ->
-            // Register a log collector to observe logs or send to analytics services like crashlytics.
-            // Log.println(level, tag, message + "${throwable?.printStackTrace() ?: ""}")
-        }
+        // Register a log collector to observe logs or send to analytics services like crashlytics.
+        Logger.collector = Logger.Collector { level, tag, message, throwable -> }
 
         if (VideoKit.sessions().get() != null) return
         val loading = findViewById<ProgressBar>(R.id.loading)
