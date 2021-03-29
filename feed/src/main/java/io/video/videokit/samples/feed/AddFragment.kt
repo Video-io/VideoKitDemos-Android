@@ -58,7 +58,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                             back()
                         }
                     }
-                    builder.setCancelable(true)
+                    builder.setCancelable(false)
                     builder.setTitle("Something went wrong")
                     builder.setMessage(message)
                     builder.show()

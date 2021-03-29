@@ -120,7 +120,7 @@ class RecordFragment : RecorderFragment() {
                         requireActivity().finish()
                     }
                 }
-                builder.setCancelable(true)
+                builder.setCancelable(false)
                 builder.setTitle("Something went wrong")
                 builder.setMessage(message)
                 builder.show()
