@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Override the editor overlay to add the "Recorder" button -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <io.video.videokit.editor.ui.controls.EditorControls
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/editor_controls"/>
+
+    <ImageView
+        android:id="@+id/open_recorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:padding="16dp"
+        android:src="@drawable/ic_round_photo_camera_24"/>
+
+    <TextView
+        android:id="@+id/empty_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Empty editor. Please add video segments from camera or from gallery."
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="64dp"/>
+</FrameLayout>

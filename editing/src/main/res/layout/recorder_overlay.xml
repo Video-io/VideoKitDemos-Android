@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Override the editor overlay to add the "Recorder" button -->
+<io.video.videokit.recorder.ui.controls.RecorderControls
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/recorder_controls"
+    app:recorderControlsShowPreviewScreen="false"/>
