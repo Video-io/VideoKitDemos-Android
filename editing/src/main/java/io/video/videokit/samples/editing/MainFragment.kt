@@ -66,18 +66,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         // - show a toast to teach the user about hold & drag
         // - handle errors
         // - open the edited video onResult
-        // - control the emtpyMessage visibility
+        // - control the extra views visibility
         editor.addListener(viewLifecycleOwner, object : EditorListener {
 
             private var toastShown = false
 
             override fun onSegmentsChanged(segments: List<Segment>) {
-                super.onSegmentsChanged(segments)
                 emptyMessageView.isVisible = segments.isEmpty()
                 if (segments.size == 2 && editor.state == EditorState.PREVIEW && !toastShown) {
                     Toast.makeText(requireContext(), "Hold & drag to rearrange segments.", LENGTH_LONG).show()
                     toastShown = true
                 }
+            }
+
+            override fun onStateChanged(state: Int) {
+                openRecorderView.isVisible = state == EditorState.PREVIEW
             }
 
             override fun onResult(edit: Edit) {
