@@ -32,6 +32,27 @@ subprojects {
     configurations.configureEach {
         resolutionStrategy { cacheChangingModulesFor 0, 'seconds' }
     }
+
+    plugins.withId("com.android.application") {
+        def keystorePropertiesFile = rootProject.file("keystore.properties")
+        def keystoreProperties = new Properties()
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+        android {
+            signingConfigs {
+                config {
+                    keyAlias keystoreProperties['signing.key']
+                    keyPassword keystoreProperties['signing.password']
+                    storeFile rootProject.file('keystore')
+                    storePassword keystoreProperties['signing.store.password']
+                }
+            }
+            buildTypes {
+                release {
+                    signingConfig signingConfigs.config
+                }
+            }
+        }
+    }
 }
 
 task clean(type: Delete) {
