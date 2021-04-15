@@ -35,11 +35,18 @@ jobs:
         ./gradlew editing:assembleRelease
         ./gradlew stories:assembleRelease
         ./gradlew feed:assembleRelease
-    - name: Upload APKs
+    - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
-          name: aars
-          path: |
-            editing/build/outputs/apk/release/editing-release.apk
-            stories/build/outputs/apk/release/stories-release.apk
-            feed/build/outputs/apk/release/feed-release.apk
+          name: editing.apk
+          path: editing/build/outputs/apk/release/editing-release.apk
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+          name: stories.apk
+          path: stories/build/outputs/apk/release/stories-release.apk
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+          name: feed.apk
+          path: feed/build/outputs/apk/release/feed-release.apk
