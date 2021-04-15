@@ -15,6 +15,8 @@ For more information, please [read the documentation](https://docs.video.io/docs
 |  <br><img src="readme/videokit_logo.png" alt="VideoKit" width="60"></img> **VK Stories** <br><br>A sample app that shows a recording interface to add new stories, and a reactive list of available stories. It demonstrates: <br><br>• Using reactive playlists<br>• Using Pager to display playlists<br>• Fragment subclassing<br>• Custom recorder overlays & viewbinding<br>• Recorder state handling<br><br>**[> Browse](stories/)** <br><br> | <img src="readme/stories.jpg" width="320" alt="VideoKit sample demo">|
 |  |  |
 |  <br><img src="readme/videokit_logo.png" alt="VideoKit" width="60"></img> **VK Editing** <br><br>A sample app that showcases VideoKit's editing features and teaches how to integrate editing within the recorder flow. It demonstrates: <br><br>• Using the EditorFragment<br>• Recording multiple clips at once with `Recorder.writeClips`<br>• Passing clip data from recorder to editor<br><br>**[> Browse](editing/)** <br><br> | <img src="readme/editing.jpg" width="320" alt="VideoKit sample demo">|
+|  |  |
+|  <br><img src="readme/videokit_logo.png" alt="VideoKit" width="60"></img> **VK Stream** <br><br>A sample app that implement live stream hosting and viewing using VideoKit's live SDK. It demonstrates: <br><br>• Using `StreamHostFragment` to host streams<br>• Using `VideoKit.streams()` to query for available streams<br>• Using `StreamViewerFragment` to view existing streams<br><br>**[> Browse](stream/)** <br><br> | <img src="readme/stream.jpg" width="320" alt="VideoKit sample demo">|
 
 ## License
 
