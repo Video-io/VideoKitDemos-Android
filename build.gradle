@@ -35,20 +35,22 @@ subprojects {
 
     plugins.withId("com.android.application") {
         def keystorePropertiesFile = rootProject.file("keystore.properties")
-        def keystoreProperties = new Properties()
-        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-        android {
-            signingConfigs {
-                config {
-                    keyAlias keystoreProperties['signing.key']
-                    keyPassword keystoreProperties['signing.password']
-                    storeFile rootProject.file('keystore')
-                    storePassword keystoreProperties['signing.store.password']
+        if (keystorePropertiesFile.exists()) {
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            android {
+                signingConfigs {
+                    config {
+                        keyAlias keystoreProperties['signing.key']
+                        keyPassword keystoreProperties['signing.password']
+                        storeFile rootProject.file('keystore')
+                        storePassword keystoreProperties['signing.store.password']
+                    }
                 }
-            }
-            buildTypes {
-                release {
-                    signingConfig signingConfigs.config
+                buildTypes {
+                    release {
+                        signingConfig signingConfigs.config
+                    }
                 }
             }
         }

@@ -10,9 +10,6 @@ jobs:
   DEPLOY:
     name: Deploy APKs
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./
     env:
       SIGNING_STORE: ${{ secrets.SIGNING_STORE }}
       SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
