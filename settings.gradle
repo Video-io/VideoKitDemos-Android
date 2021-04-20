@@ -1,4 +1,5 @@
 include ':feed'
 include ':stories'
 include ':editing'
+include ':stream'
 rootProject.name = "VideoKitDemos-Android"

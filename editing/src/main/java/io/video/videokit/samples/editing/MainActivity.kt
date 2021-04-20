@@ -21,9 +21,13 @@ class MainActivity : AppCompatActivity() {
         // Register a log collector to observe logs or send to analytics services like crashlytics.
         Logger.collector = Logger.Collector { level, tag, message, throwable -> }
 
-        if (VideoKit.sessions().get() != null) return
         val loading = findViewById<ProgressBar>(R.id.loading)
         val message = findViewById<TextView>(R.id.message)
+        if (VideoKit.sessions().get() != null) {
+            loading.isVisible = false
+            message.isVisible = false
+            return
+        }
         VideoKit.sessions().start(
                 appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2lkIjoiMW81cFBiVzMwNG44SXVwR2JVSm8iLCJyb2xlIjoiYXBwIiwiaWF0IjoxNjEyMTY2MzkwLCJpc3MiOiJ2aWRlby5pbyIsImp0aSI6ImZQN290S3dFb2V5U2tGNVNzQVBmLXdkaDU1In0.ebYY3nXYCyc9b8NuQZ742ejLEKsqxh0lZiK7FjtmKBM",
                 identity = UUID.randomUUID().toString()
