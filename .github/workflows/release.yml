@@ -31,10 +31,11 @@ jobs:
         ./gradlew editing:assembleRelease
         ./gradlew stories:assembleRelease
         ./gradlew feed:assembleRelease
+        ./gradlew stream:assembleRelease
     - name: Create Release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: editing/build/outputs/apk/release/editing-release.apk,feed/build/outputs/apk/release/feed-release.apk,stories/build/outputs/apk/release/stories-release.apk
+        artifacts: editing/build/outputs/apk/release/editing-release.apk,feed/build/outputs/apk/release/feed-release.apk,stories/build/outputs/apk/release/stories-release.apk,stream/build/outputs/apk/release/stream-release.apk
         artifactErrorsFailBuild: true
         token: ${{ secrets.GITHUB_TOKEN }}
 

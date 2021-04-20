@@ -46,3 +46,8 @@ jobs:
       with:
           name: feed.apk
           path: feed/build/outputs/apk/release/feed-release.apk
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+          name: stream.apk
+          path: stream/build/outputs/apk/release/stream-release.apk

@@ -18,3 +18,4 @@ jobs:
         ./gradlew editing:assembleDebug
         ./gradlew stories:assembleDebug
         ./gradlew feed:assembleDebug
+        ./gradlew stream:assembleDebug
